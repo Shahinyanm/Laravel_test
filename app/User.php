@@ -41,4 +41,8 @@ class User extends Authenticatable
     public function isAdmin(){
         return $this->type === self::ADMIN;
     }
+
+    public function companies(){
+        return $this->hasMany(Company::class);
+    }
 }

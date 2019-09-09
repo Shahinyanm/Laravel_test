@@ -15,6 +15,23 @@ class CreateCompaniesTable extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name')->unique();
+            $table->string('country');
+            $table->string('city');
+            $table->string('street');
+            $table->string('number');
+            $table->string('post');
+
+
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->bigInteger('company_type_id')->unsigned()->nullable();
+            $table->bigInteger('currency_id')->unsigned()->nullable();
+
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('company_type_id')->references('id')->on('company_types')->onDelete('cascade');
+            $table->foreign('currency_id')->references('id')->on('currencies')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
