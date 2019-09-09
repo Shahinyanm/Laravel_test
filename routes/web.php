@@ -21,10 +21,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::middleware(['auth'])->group(function () {
 
     Route::group([
-        'middleware' => 'is_admin', 'prefix' => 'admin', 'name' => 'admin.'
+        'middleware' => 'is_admin', 'prefix' => 'admin', 'as' => 'admin.'
     ], function () {
-        Route::get('/', 'AdminController@index')->name('index');
-
+        Route::resource('companies','Admin\CompanyController');
+        Route::get('users','UserController@index')->name('users.index');
     });
 
 });

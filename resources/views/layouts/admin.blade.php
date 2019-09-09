@@ -10,7 +10,6 @@
   @stack('css')
     <!-- modernizr JS
 		============================================ -->
-    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
 <body>
