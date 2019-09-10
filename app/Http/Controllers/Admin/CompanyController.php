@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Company;
 use App\CompanyType;
 use App\Currency;
+use App\Http\Requests\CompanyRequest;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -32,7 +33,7 @@ class CompanyController extends Controller
     {
         $companyTypes= CompanyType::all();
         $currencies = Currency::all();
-        $users = User::all();
+        $users = User::where('type','!=',User::ADMIN)->get();
 
         return view('admin.companies.create',compact('users','currencies','companyTypes'));
     }
@@ -43,9 +44,11 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CompanyRequest $request)
     {
-        //
+        Company::create($request->all());
+
+        return redirect()->route('admin.companies.index')->with('success','Company has created Successfully');
     }
 
     /**
@@ -56,7 +59,7 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        //
+        return view('admin.companies.show',compact('company'));
     }
 
     /**
@@ -67,7 +70,10 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        //
+        $companyTypes= CompanyType::all();
+        $currencies = Currency::all();
+        $users = User::where('type','!=',User::ADMIN)->get();
+        return view('admin.companies.edit',compact('company','users','currencies','companyTypes'));
     }
 
     /**
@@ -77,9 +83,11 @@ class CompanyController extends Controller
      * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Company $company)
+    public function update(CompanyRequest $request, Company $company)
     {
-        //
+
+        $company->update($request->all());
+        return redirect()->route('admin.companies.index')->with('success','Company has been updated Successfully');
     }
 
     /**
@@ -90,6 +98,8 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        //
+        $company->delete();
+        return redirect()->route('admin.companies.index')->with('success','Company has been deleted Successfully');
+
     }
 }

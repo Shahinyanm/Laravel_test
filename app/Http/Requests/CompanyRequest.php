@@ -13,7 +13,7 @@ class CompanyRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,18 @@ class CompanyRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'=> 'required|string',
+            'country'=> 'required|string',
+            'city'=> 'required|string',
+            'street'=> 'required|string',
+            'number'=> 'required',
+            'post'=> 'required',
+            'company_type_id'=> 'required',
+            'currency_id'=> 'required',
+            'user_id'=> 'required',
+
+
+
         ];
     }
 }

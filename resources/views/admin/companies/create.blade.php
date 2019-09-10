@@ -29,70 +29,79 @@
         <div class="container">
             <form action="{{route('admin.companies.store')}}" method="POST" >
                 @csrf
-                @method('put')
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="form-element-list">
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <div class="form-group ic-cmp-int">
+                                    <div class="form-group ic-cmp-int {{ $errors->has('name') ? 'has-error' : ''}}">
                                         <div class="form-ic-cmp">
                                             <i class="notika-icon notika-support"></i>
                                         </div>
                                         <div class="nk-int-st">
-                                            <input type="text" class="form-control" name="name" placeholder="Company Name" value="{{$company->name??''}}">
+                                            <input type="text" class="form-control " name="name" placeholder="Company Name" value="{{$company->name??''}}">
+                                            {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <div class="form-group ic-cmp-int">
+                                    <div class="form-group {{ $errors->has('country') ? 'has-error' : ''}} ic-cmp-int">
                                         <div class="form-ic-cmp">
                                             <i class="notika-icon notika-map"></i>
                                         </div>
                                         <div class="nk-int-st">
                                             <input type="text" class="form-control"  name="country" placeholder="Country" value="{{$company->country??''}}">
+                                            {!! $errors->first('country', '<p class="help-block">:message</p>') !!}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <div class="form-group ic-cmp-int">
+                                    <div class="form-group {{ $errors->has('city') ? 'has-error' : ''}} ic-cmp-int">
                                         <div class="form-ic-cmp">
                                             <i class="notika-icon notika-map"></i>
                                         </div>
                                         <div class="nk-int-st">
                                             <input type="text" class="form-control" placeholder="City" name="city" value="{{$country->city??''}}">
+                                            {!! $errors->first('city', '<p class="help-block">:message</p>') !!}
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <div class="form-group ic-cmp-int">
+                                    <div class="form-group {{ $errors->has('street') ? 'has-error' : ''}} ic-cmp-int">
                                         <div class="form-ic-cmp">
                                             <i class="notika-icon notika-map"></i>
                                         </div>
                                         <div class="nk-int-st">
                                             <input type="text" class="form-control" name="street" placeholder="street" value="{{$country->street??''}}">
+                                            {!! $errors->first('street', '<p class="help-block">:message</p>') !!}
+
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <div class="form-group ic-cmp-int">
+                                    <div class="form-group {{ $errors->has('number') ? 'has-error' : ''}} ic-cmp-int">
                                         <div class="form-ic-cmp">
                                             <i class="notika-icon notika-map"></i>
                                         </div>
                                         <div class="nk-int-st">
                                             <input type="text" class="form-control" name="number" placeholder="Street address" value="{{$country->number??''}}">
+                                            {!! $errors->first('number', '<p class="help-block">:message</p>') !!}
+
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <div class="form-group ic-cmp-int">
+                                    <div class="form-group {{ $errors->has('post') ? 'has-error' : ''}} ic-cmp-int">
                                         <div class="form-ic-cmp">
                                             <i class="notika-icon notika-next"></i>
                                         </div>
                                         <div class="nk-int-st">
                                             <input type="text" class="form-control" placeholder="Postal Code" name="post" value="{{$company->post??''}}">
+                                            {!! $errors->first('post', '<p class="help-block">:message</p>') !!}
+
                                         </div>
                                     </div>
                                 </div>
@@ -100,48 +109,54 @@
 
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <div class="nk-int-mk sl-dp-mn">
+                                    <div class=" form-group {{ $errors->has('user_id') ? 'has-error' : ''}}nk-int-mk sl-dp-mn ">
                                         <h2>Chose User</h2>
                                     </div>
                                     <div class="chosen-select-act fm-cmp-mg">
-                                        <select class="chosen"  name="user" data-placeholder="Choose a User...">
+                                        <select class="chosen"  name="user_id" data-placeholder="Choose a User...">
                                             @foreach($users as $user)
                                                 <option  value="{{$user->id}}"> {{$user->name}}</option>
                                             @endforeach
                                         </select>
+                                        {!! $errors->first('user_id', '<p class="help-block">:message</p>') !!}
+
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <div class="nk-int-mk sl-dp-mn">
+                                    <div class="form-group {{ $errors->has('company_type_id') ? 'has-error' : ''}}nk-int-mk sl-dp-mn">
                                         <h2>Chose Company Type</h2>
                                     </div>
                                     <div class="chosen-select-act fm-cmp-mg">
-                                        <select class="chosen"  name="type" data-placeholder="Choose a User...">
+                                        <select class="chosen"  name="company_type_id" data-placeholder="Choose a User...">
                                             @foreach($companyTypes as $type)
                                                 <option  value="{{$type->id}}"> {{$type->type}}</option>
                                             @endforeach
                                         </select>
+                                        {!! $errors->first('company_type_id', '<p class="help-block">:message</p>') !!}
+
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <div class="nk-int-mk sl-dp-mn">
+                                    <div class=" form-group {{ $errors->has('currency_id') ? 'has-error' : ''}} nk-int-mk sl-dp-mn">
                                         <h2>Chose Currency</h2>
                                     </div>
                                     <div class="chosen-select-act fm-cmp-mg">
-                                        <select class="chosen"  name="type" data-placeholder="Choose a User...">
+                                        <select class="chosen"  name="currency_id" data-placeholder="Choose a User...">
                                             @foreach($currencies as $currency)
                                                 <option  value="{{$currency->id}}"> {{$currency->currency}}</option>
                                             @endforeach
                                         </select>
+                                        {!! $errors->first('currency_id', '<p class="help-block">:message</p>') !!}
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
+            <button type="submit" class="btn btn-block btn-success"> Create Company</button>
             </form>
 
         </div>

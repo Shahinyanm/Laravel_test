@@ -1,8 +1,16 @@
 @extends('layouts.admin')
 
 @section('content')
+
     <div class="normal-table-area">
         <div class="container">
+            @if (\Session::has('success'))
+                <div class="alert alert-success">
+                    <ul>
+                        <li>{!! \Session::get('success') !!}</li>
+                    </ul>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="normal-table-list">
@@ -44,18 +52,18 @@
                                         <td>{{$company->user->name}}</td>
                                         <td>{{$company->created_at}}</td>
                                         <td>
-                                            <form action="{{route('admin.companies.destroy',$company->id)}}">
+                                            <form action="{{route('admin.companies.destroy',$company->id)}}" method="POST">
                                                 @csrf
                                                 @method('delete')
                                                 <a href="{{route('admin.companies.show',$company->id)}}"
-                                                   class="btn btn-success success-icon-notika waves-effect btn-xs">
+                                                   class="btn btn-success success-icon-notika waves-effect btn-xs" title="View Company">
                                                     <i class="notika-icon notika-menus"></i>
                                                 </a>
                                                 <a href="{{route('admin.companies.edit',$company->id)}}"
-                                                   class="btn btn-warning warning-icon-notika waves-effect btn-xs">
+                                                   class="btn btn-warning warning-icon-notika waves-effect btn-xs" title="Edit Company">
                                                     <i class="notika-icon notika-refresh"></i>
                                                 </a>
-                                                <button  type="submit" class="btn btn-danger btn-xs danger-icon-notika waves-effect"><i class="notika-icon notika-close"></i></button>
+                                                <button title="Delete Company" type="submit" class="btn btn-danger btn-xs danger-icon-notika waves-effect"><i class="notika-icon notika-close"></i></button>
                                             </form>
                                         </td>
                                     </tr>
