@@ -21,7 +21,7 @@ Route::middleware(['auth'])->group(function () {
         'middleware' => 'is_admin', 'prefix' => 'admin', 'as' => 'admin.'
     ], function () {
         Route::resource('companies','Admin\CompanyController');
-        Route::get('users','UserController@index')->name('users.index');
+        Route::resource('users','Admin\UserController')->except('create','store','show');
     });
 
 });

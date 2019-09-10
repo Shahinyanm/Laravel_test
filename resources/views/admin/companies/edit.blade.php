@@ -13,8 +13,8 @@
                                         <i class="notika-icon notika-form"></i>
                                     </div>
                                     <div class="breadcomb-ctn">
-                                        <h2>Companies</h2>
-                                        <p>Welcome to Company Edit Page</p>
+                                        <h2>User</h2>
+                                        <p>Welcome to User Edit Page</p>
                                     </div>
                                 </div>
                             </div>
