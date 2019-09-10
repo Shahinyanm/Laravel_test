@@ -18,6 +18,6 @@ class IsAdminMiddleware
         if(auth()->user()->isAdmin()) {
             return $next($request);
         }
-        return redirect('/');
+        return redirect('/home');
     }
 }
